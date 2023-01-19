@@ -11,7 +11,6 @@ export * from './deleteContactRequest';
 export * from './deleteEventRequest';
 export * from './deleteItemRequest';
 export * from './deletePositionRequest';
-export * from './dtoNameId';
 export * from './eventDto';
 export * from './eventType';
 export * from './gearItemDto';

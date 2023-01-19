@@ -1,7 +1,11 @@
 <button (click)="goToDashboard()" class="return-button">Powrót</button>
 <button (click)="add()" class="return-button">Dodaj nowy przedmiot</button>
+<button (click)="add()" class="return-button">Dodaj wypożyczony przedmiot</button>
+
 <div class="items">
-    <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+</div>
+<div class="items">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nazwa </th>
@@ -27,6 +31,9 @@
                 <mat-icon>format_list_bulleted</mat-icon>
               </div>
               <mat-menu #tableMenuAction="matMenu" xPosition="before">
+                <button mat-menu-item (click)="add()">
+                  Dodaj usługę
+                </button>
                 <button mat-menu-item (click)="edit(item)">
                   Edytuj
                 </button>

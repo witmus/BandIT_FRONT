@@ -49,7 +49,7 @@ export class GearTypes extends BaseTypes{
 export class PositionTypes extends BaseTypes{
   static override get Types(): EnumValue[] {
     return [
-      {value: 0, text: "Domyślna"},
+      {value: 0, text: "Domyślny"},
       {value: 1, text: "Wypłata"},
       {value: 2, text: "Merch"},
       {value: 3, text: "Bilety"},
@@ -70,6 +70,20 @@ export class UserRoles extends BaseTypes {
       {value: 1, text: "Pracownik"},
       {value: 2, text: "Członek zespołu"},
       {value: 3, text: "Menedżer"},
+    ]
+  }
+}
+
+export class EventTypes extends BaseTypes{
+  static override get Types(): EnumValue[] {
+    return [
+      {value: 0, text: "Domyślny"},
+      {value: 1, text: "Próba"},
+      {value: 2, text: "Sesja nagraniowa"},
+      {value: 3, text: "Koncert"},
+      {value: 4, text: "Wywiad"},
+      {value: 5, text: "Wypożyczenie"},
+      {value: 6, text: "Usługa"},
     ]
   }
 }

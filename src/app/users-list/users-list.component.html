@@ -1,5 +1,7 @@
 <button (click)="goToDashboard()" class="return-button">Powrót</button>
 <div class="users">
+    <h1>Zespół: {{userInfo.band?.name}}</h1>
+    <h2>Kod dostępu: {{userInfo.band?.accessCode}}</h2>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nazwa </th>

@@ -1,1 +1,28 @@
-<p>add-event works!</p>
+<div>
+    <form [formGroup]="eventForm">
+        <input type="text" placeholder="Nazwa" formControlName="name">
+        <input type="datetime-local" placeholder="Początek" formControlName="start">
+        <input type="datetime-local" placeholder="Koniec" formControlName="end">
+        <input type="text" placeholder="Opis" formControlName="description">
+        <mat-form-field appearance="fill">
+            <mat-label>Typ</mat-label>
+            <mat-select [(value)]="eventForm.value.eventType" name="c">
+              <mat-option *ngFor="let type of eventTypes" [value]="type.value">
+                {{type.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-label>Kontakt</mat-label>
+              <mat-select [(value)]="eventForm.value.contact" name="c">
+                <mat-option *ngFor="let contact of contacts" [value]="contact.id">
+                  {{contact.firstName}} {{contact?.lastName ?? ''}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="eventForm.value" cdkFocusInitial>Ok</button>
+</div>

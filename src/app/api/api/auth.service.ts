@@ -263,9 +263,9 @@ export class AuthService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
     public apiAuthUserUserIdPatch(userId: string, newRole?: UserRole, oldRole?: UserRole, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (userId === null || userId === undefined) {
@@ -291,6 +291,9 @@ export class AuthService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -301,7 +304,7 @@ export class AuthService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<any>('patch',`${this.basePath}/api/auth/user/${encodeURIComponent(String(userId))}`,
+        return this.httpClient.request<UserDto>('patch',`${this.basePath}/api/auth/user/${encodeURIComponent(String(userId))}`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

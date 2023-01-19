@@ -4,10 +4,12 @@
 <button (click)="getReport()" class="return-button">Pobierz raport</button>
 <h2>Bilans: {{balance | number:'.2'}}</h2>
 <div class="positions">
-    <input id="year" class="period" type="number" min="2020" max="2999" [(ngModel)]="year">
-    <input id="month" class="period" type="number" min="1" max="12" [(ngModel)]="month">
-    <button class="period-button" (click)="getPositions()">Pobierz pozycje</button>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+  <input id="year" class="period" placeholder="Rok" type="number" min="2020" max="2999" [(ngModel)]="year">
+  <input id="month" class="period" placeholder="Miesiąc" type="number" min="1" max="12" [(ngModel)]="month">
+  <button class="period-button" (click)="getPositions()">Pobierz pozycje</button>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+</div>
+<div class="positions">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nazwa </th>
@@ -21,7 +23,7 @@
 
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef> Data </th>
-            <td mat-cell *matCellDef="let position"> {{position.date}} </td>
+            <td mat-cell *matCellDef="let position"> {{position.date | date: 'dd-MM-yyyy HH:mm'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="type">

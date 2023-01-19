@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BudgetPositionDto } from 'src/app/api';
+import { BudgetPositionDto, EventDto } from 'src/app/api';
 import { PositionTypes } from 'src/app/enums';
 
 @Component({
@@ -12,6 +12,7 @@ import { PositionTypes } from 'src/app/enums';
 export class AddPositionComponent implements OnInit {
   positionForm: FormGroup;
   positionTypes = PositionTypes.Types;
+  @Input('events') events: EventDto[];
 
   constructor(
     private readonly formBuilder: FormBuilder,

@@ -2,7 +2,7 @@
     <form [formGroup]="positionForm">
         <input type="text" placeholder="Nazwa" formControlName="name">
         <input type="number" placeholder="Kwota" formControlName="amount">
-        <input type="datetime" placeholder="Data" formControlName="date">
+        <input type="datetime-local" placeholder="Data" formControlName="date">
         <input type="text" placeholder="Opis" formControlName="description">
         <mat-form-field appearance="fill">
             <mat-label>Typ</mat-label>
@@ -12,6 +12,14 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field appearance="fill">
+              <mat-label>Kontakt</mat-label>
+              <mat-select [(value)]="positionForm.value.event" name="e">
+                <mat-option *ngFor="let event of events" [value]="event.id">
+                  {{event.name}} {{event.start | date: 'dd-MM-yyyy'}} - {{event.end | date: 'dd-MM-yyyy'}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>

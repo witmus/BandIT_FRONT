@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { BandDto } from './bandDto';
-import { DtoNameId } from './dtoNameId';
+import { ContactDto } from './contactDto';
 import { EventType } from './eventType';
 
 export interface EventDto { 
@@ -22,5 +22,5 @@ export interface EventDto {
     eventType?: EventType;
     start?: Date;
     end?: Date;
-    contact?: DtoNameId;
+    contact?: ContactDto;
 }

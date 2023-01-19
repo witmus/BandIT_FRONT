@@ -1,1 +1,58 @@
 <button (click)="goToDashboard()" class="return-button">Powrót</button>
+<button (click)="add()" class="return-button">Dodaj wydarzenie</button>
+<div class="events">
+    <input id="year" class="period" placeholder="Rok" type="number" min="2020" max="2999" [(ngModel)]="year">
+    <input id="month" class="period" placeholder="Miesiąc" type="number" min="1" max="12" [(ngModel)]="month">
+    <button class="period-button" (click)="getEvents()">Pobierz wydarzenia</button>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+</div>
+<div class="events">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+            <td mat-cell *matCellDef="let event"> {{event.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef> Początek </th>
+            <td mat-cell *matCellDef="let event"> {{event.start | date: 'dd-MM-yyyy HH:mm'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="end">
+            <th mat-header-cell *matHeaderCellDef> Koniec </th>
+            <td mat-cell *matCellDef="let event"> {{event.end | date: 'dd-MM-yyyy HH:mm'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Typ </th>
+            <td mat-cell *matCellDef="let event"> {{event.eventType | eventType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contact">
+            <th mat-header-cell *matHeaderCellDef> Kontakt </th>
+            <td mat-cell *matCellDef="let event"> {{event?.contact?.firstName ?? ''}} {{event?.contact?.lastName ?? ''}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>
+              Opcje
+            </th>
+            <td mat-cell *matCellDef="let event">
+              <div [matMenuTriggerFor]="tableMenuAction">
+                <mat-icon>format_list_bulleted</mat-icon>
+              </div>
+              <mat-menu #tableMenuAction="matMenu" xPosition="before">
+                <button mat-menu-item (click)="edit(event)">
+                  Edytuj
+                </button>
+                <button mat-menu-item (click)="delete(event.id)">
+                    Usuń
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { BandDto } from './bandDto';
-import { DtoNameId } from './dtoNameId';
+import { EventDto } from './eventDto';
 import { PositionType } from './positionType';
 
 export interface BudgetPositionDto { 
@@ -22,5 +22,5 @@ export interface BudgetPositionDto {
     date?: Date;
     positionType?: PositionType;
     description?: string;
-    event?: DtoNameId;
+    event?: EventDto;
 }

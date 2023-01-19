@@ -1,7 +1,9 @@
 <button (click)="goToDashboard()" class="return-button">Powrót</button>
 <button (click)="add()" class="return-button">Dodaj nowy kontakt</button>
 <div class="contacts">
-    <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+</div>
+<div class="contacts">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nazwa </th>

@@ -159,16 +159,28 @@ export class ScheduleService {
      * 
      * 
      * @param bandId 
+     * @param year 
+     * @param month 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiScheduleListBandIdGet(bandId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<EventDto>>;
-    public apiScheduleListBandIdGet(bandId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<EventDto>>>;
-    public apiScheduleListBandIdGet(bandId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<EventDto>>>;
-    public apiScheduleListBandIdGet(bandId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public apiScheduleListBandIdGet(bandId: number, year?: number, month?: number, observe?: 'body', reportProgress?: boolean): Observable<Array<EventDto>>;
+    public apiScheduleListBandIdGet(bandId: number, year?: number, month?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<EventDto>>>;
+    public apiScheduleListBandIdGet(bandId: number, year?: number, month?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<EventDto>>>;
+    public apiScheduleListBandIdGet(bandId: number, year?: number, month?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (bandId === null || bandId === undefined) {
             throw new Error('Required parameter bandId was null or undefined when calling apiScheduleListBandIdGet.');
+        }
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (year !== undefined && year !== null) {
+            queryParameters = queryParameters.set('year', <any>year);
+        }
+        if (month !== undefined && month !== null) {
+            queryParameters = queryParameters.set('month', <any>month);
         }
 
         let headers = this.defaultHeaders;
@@ -193,6 +205,7 @@ export class ScheduleService {
 
         return this.httpClient.request<Array<EventDto>>('get',`${this.basePath}/api/schedule/list/${encodeURIComponent(String(bandId))}`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

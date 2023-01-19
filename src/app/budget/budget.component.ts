@@ -4,12 +4,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs';
-import { AddPositionRequest, BudgetPositionDto, BudgetService, UpdatePositionRequest } from '../api';
+import { AddPositionRequest, BudgetPositionDto, BudgetService, EventDto, ScheduleService, UpdatePositionRequest } from '../api';
 import { Authenticable } from '../authenticable';
 import { PositionTypes } from '../enums';
 import { UserInfoService } from '../user-info.service';
 import { AddPositionComponent } from './add-position/add-position.component';
-import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -20,8 +19,9 @@ import * as FileSaver from 'file-saver';
 export class BudgetComponent extends Authenticable implements OnInit {
 
   positions: BudgetPositionDto[];
+  events: EventDto[];
   dataSource: MatTableDataSource<BudgetPositionDto>;
-  displayedColumns: string[] = ['name', 'amount', 'date', 'type', 'description', 'action'];
+  displayedColumns: string[] = ['name', 'amount', 'date', 'type', 'action'];
   contactTypes = PositionTypes.Types;
 
   year: number = new Date().getFullYear();
@@ -36,7 +36,8 @@ export class BudgetComponent extends Authenticable implements OnInit {
     router: Router,
     snackbar: MatSnackBar,
     public dialog: MatDialog,
-    private readonly budgetService: BudgetService 
+    private readonly budgetService: BudgetService,
+    private readonly scheduleService: ScheduleService
   ){
     super(userService, router, snackbar);
   }
@@ -51,15 +52,23 @@ export class BudgetComponent extends Authenticable implements OnInit {
     const bandId: number = this.userInfo.band?.id ?? 0;
 
     this.budgetService
-    .apiBudgetListBandIdGet(bandId, this.year, this.month)
-    .subscribe(
-      (res: BudgetPositionDto[]) => {
-        this.balance = 0;
-        res.map((position: BudgetPositionDto) => this.balance += position.amount ?? 0);
-        this.positions = res;
-        this.dataSource = new MatTableDataSource(this.positions);
-      },
-    )
+      .apiBudgetListBandIdGet(bandId, this.year, this.month)
+      .subscribe(
+        (res: BudgetPositionDto[]) => {
+          this.balance = 0;
+          res.map((position: BudgetPositionDto) => this.balance += position.amount ?? 0);
+          this.positions = res;
+          this.dataSource = new MatTableDataSource(this.positions);
+        },
+      )
+
+    this.scheduleService
+      .apiScheduleListBandIdGet(bandId, this.year, this.month)
+      .subscribe(
+        (res: EventDto[]) => {
+          this.events = res;
+        }
+      )
   }
 
   applyFilter(event: Event) {
@@ -68,7 +77,9 @@ export class BudgetComponent extends Authenticable implements OnInit {
   }
 
   add(): void {
-    this.dialog.open(AddPositionComponent)
+    const dialog = this.dialog.open(AddPositionComponent);
+    dialog.componentInstance.events = this.events;
+    dialog
     .afterClosed()
     .pipe(
       filter((res: AddPositionRequest) => !!res),
@@ -80,16 +91,17 @@ export class BudgetComponent extends Authenticable implements OnInit {
     )
     .subscribe(
       (res: BudgetPositionDto) => {
-        console.log(res);
-        this.positions.push(res);
-        this.table.renderRows();
+          this.positions.push(res);
+          this.table.renderRows();
       });
   }
 
-  edit(position: BudgetPositionDto){
-    this.dialog.open(AddPositionComponent, {
+  edit(position: BudgetPositionDto): void {
+    const dialog = this.dialog.open(AddPositionComponent, {
       data: position
     })
+    dialog.componentInstance.events = this.events;
+    dialog
     .afterClosed().pipe(
       filter((res: UpdatePositionRequest) => !!res),
       mergeMap((res: UpdatePositionRequest) => 
@@ -102,7 +114,7 @@ export class BudgetComponent extends Authenticable implements OnInit {
     });
   }
 
-  delete(id: number){
+  delete(id: number): void {
     this.budgetService
     .apiBudgetDelete({ positionId: id })
     .subscribe(

@@ -36,6 +36,7 @@ import { AddEventComponent } from './schedule/add-event/add-event.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserRolePipe } from './user-role.pipe';
 import { AssignRoleComponent } from './users-list/assign-role/assign-role.component';
+import { EventTypePipe } from './event-type.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AssignRoleComponent } from './users-list/assign-role/assign-role.compon
     AddEventComponent,
     UsersListComponent,
     UserRolePipe,
-    AssignRoleComponent
+    AssignRoleComponent,
+    EventTypePipe
   ],
   imports: [
     BrowserModule,

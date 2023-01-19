@@ -1,6 +1,6 @@
 .items {
-    width: 75%;
-    height: 75%;
+    width: 90%;
+    max-height: 60%;
     margin: auto;
     overflow: auto;
 }
