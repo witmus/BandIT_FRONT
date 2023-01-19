@@ -1,0 +1,33 @@
+.positions {
+    width: 75%;
+    height: 75%;
+    margin: auto;
+    overflow: auto;
+}
+
+input {
+    width: 100%;
+    padding: 1em 1em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+.period {
+    width: 33%;
+    margin: 1em 0;
+}
+
+.period-button {
+    width: 33%;
+    background-color: #1050F0;
+    color: white;
+    padding: 1em 1em;
+    margin: 1em 0;
+    cursor: pointer;
+  }
+  
+  .period-button:hover {
+    background-color: #10A0F0;
+  }

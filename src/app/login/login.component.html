@@ -1,0 +1,9 @@
+<div class="login-form">
+    <img style="width: 100%;" src="/assets/logo.png">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <input id="username" type="text" placeholder="Login" formControlName="userName">
+        <input type="password" placeholder="Hasło" formControlName="password">
+        <button type="submit">Zaloguj się</button>
+    </form>
+    <button (click)="navigateSignup()">Zarejestruj się</button>
+</div>

@@ -1,0 +1,15 @@
+<h1>Zmień rolę użytkownika {{user.userName}}</h1>
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Rola</mat-label>
+            <mat-select [formControl]="control" name="c">
+                <mat-option *ngFor="let type of roles" [value]="type.value">
+                    {{type.text}}
+                </mat-option>
+            </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Anuluj</button>
+    <button mat-button [mat-dialog-close]="control.value" cdkFocusInitial>Ok</button>
+</div>

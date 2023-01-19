@@ -1,0 +1,28 @@
+input[type=text], input[type=number], select {
+    width: 50%;
+    padding: 1em 1em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 50%;
+    background-color: #1050F0;
+    color: white;
+    padding: 1em 1em;
+    margin: 1em 0;
+    border: none;
+    border-radius: 1em;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #10A0F0;
+  }
+
+  .mat-form-field {
+    width: 50%;
+    margin: auto;
+  }

@@ -1,0 +1,26 @@
+.menu {
+  margin: auto;
+  width: 100%;
+}
+
+button {
+    width: 40%;
+    height: 20%;
+    background-color: #1050F0;
+    color: white;
+    padding: 1em 1em;
+    border: 1px solid black;
+    border-radius: 1em;
+    cursor: pointer;
+    margin: 1em 1em;
+    font-size: large;
+}
+
+button:hover {
+    background-color: #10A0F0;
+}
+
+.logoutbutton {
+    width: 25%;
+    height: 20%;
+  }

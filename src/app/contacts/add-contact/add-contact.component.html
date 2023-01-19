@@ -1,0 +1,21 @@
+<div class="contact-form">
+    <form [formGroup]="contactForm">
+        <input type="text" placeholder="Imię" formControlName="firstName">
+        <input type="text" placeholder="Nazwisko" formControlName="lastName">
+        <input type="text" placeholder="Numer telefonu" formControlName="phoneNumber">
+        <input type="text" placeholder="Email" formControlName="emailAddress">
+        <input type="text" placeholder="Opis" formControlName="description">
+        <mat-form-field appearance="fill">
+            <mat-label>Typ</mat-label>
+            <mat-select [(value)]="contactForm.value.contactType" name="c">
+              <mat-option *ngFor="let type of contactTypes" [value]="type.value">
+                {{type.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="contactForm.value" cdkFocusInitial>Ok</button>
+</div>

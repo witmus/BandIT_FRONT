@@ -1,0 +1,15 @@
+.items {
+    width: 75%;
+    height: 75%;
+    margin: auto;
+    overflow: auto;
+}
+
+input {
+    width: 100%;
+    padding: 1em 1em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }

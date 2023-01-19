@@ -1,0 +1,12 @@
+<h2>Witaj {{userInfo.userName}}!</h2>
+<div class="menu">
+    <button (click)="open('budget')">Budżet</button>
+    <button (click)="open('contacts')">Lista kontaktów</button>
+    <button (click)="open('gear')">Sprzęt</button>
+    <button (click)="open('schedule')">Harmonogram</button>
+</div>
+<button class="logoutbutton" (click)="logout()">Wyloguj</button>
+<button class="logoutbutton" (click)="open('password')">Zmień hasło</button>
+<ng-container *ngIf="userInfo.role > 2">
+    <button class="logoutbutton" (click)="open('users')">Lista użytkowników</button>
+</ng-container>

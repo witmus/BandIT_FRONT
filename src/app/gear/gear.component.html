@@ -1,0 +1,43 @@
+<button (click)="goToDashboard()" class="return-button">Powrót</button>
+<button (click)="add()" class="return-button">Dodaj nowy przedmiot</button>
+<div class="items">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj" #input>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+            <td mat-cell *matCellDef="let item"> {{item.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Waga </th>
+            <td mat-cell *matCellDef="let item"> {{item.weight}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Typ </th>
+            <td mat-cell *matCellDef="let item"> {{item.gearType | gearType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>
+              Opcje
+            </th>
+            <td mat-cell *matCellDef="let item">
+              <div [matMenuTriggerFor]="tableMenuAction">
+                <mat-icon>format_list_bulleted</mat-icon>
+              </div>
+              <mat-menu #tableMenuAction="matMenu" xPosition="before">
+                <button mat-menu-item (click)="edit(item)">
+                  Edytuj
+                </button>
+                <button mat-menu-item (click)="delete(item.id)">
+                    Usuń
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

@@ -1,0 +1,11 @@
+export * from './auth.service';
+import { AuthService } from './auth.service';
+export * from './budget.service';
+import { BudgetService } from './budget.service';
+export * from './contacts.service';
+import { ContactsService } from './contacts.service';
+export * from './gear.service';
+import { GearService } from './gear.service';
+export * from './schedule.service';
+import { ScheduleService } from './schedule.service';
+export const APIS = [AuthService, BudgetService, ContactsService, GearService, ScheduleService];

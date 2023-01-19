@@ -1,0 +1,18 @@
+<div class="item-form">
+    <form [formGroup]="itemForm">
+        <input type="text" placeholder="Nazwa" formControlName="name">
+        <input type="number" placeholder="Waga" formControlName="weight">
+        <mat-form-field appearance="fill">
+            <mat-label>Typ</mat-label>
+            <mat-select [(value)]="itemForm.value.gearType" name="g">
+              <mat-option *ngFor="let type of gearTypes" [value]="type.value">
+                {{type.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="itemForm.value" cdkFocusInitial>Ok</button>
+</div>

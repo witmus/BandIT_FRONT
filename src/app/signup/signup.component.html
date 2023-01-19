@@ -1,0 +1,26 @@
+<button style="width: 30%;" (click)="returnToLogin()">Powrót do logowania</button>
+
+<div class="signup-form">
+    <mat-button-toggle-group [(ngModel)]="role" #group="matButtonToggleGroup" type="number">
+        <mat-button-toggle value="3">
+            Menedżer
+        </mat-button-toggle>
+        <mat-button-toggle value="2">
+            Członek zespołu
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+    <form *ngIf="!!role" [formGroup]="signupForm" (ngSubmit)="signup()">
+        <input type="text" placeholder="Nazwa użytkownika" formControlName="userName">
+        <input type="text" placeholder="Hasło" formControlName="password">
+        <input type="text" placeholder="Imię" formControlName="firstName">
+        <input type="text" placeholder="Nazwisko" formControlName="lastName">
+        <input type="text" placeholder="Numer telefonu" formControlName="phoneNumber">
+        <input type="text" placeholder="Email" formControlName="email">
+        <div *ngIf="group.value === '3'">
+            <input type="text" placeholder="Nazwa zespołu" formControlName="bandName">
+            <input type="text" placeholder="NIP zespołu" formControlName="bandTIN">
+        </div>
+        <input type="text" placeholder="Kod dostępu" formControlName="accessCode">
+        <button [disabled]="!signupForm.valid" type="submit">Zarejestruj</button>
+    </form>
+</div>

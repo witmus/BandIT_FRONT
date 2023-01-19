@@ -1,0 +1,20 @@
+<div>
+    <form [formGroup]="positionForm">
+        <input type="text" placeholder="Nazwa" formControlName="name">
+        <input type="number" placeholder="Kwota" formControlName="amount">
+        <input type="datetime" placeholder="Data" formControlName="date">
+        <input type="text" placeholder="Opis" formControlName="description">
+        <mat-form-field appearance="fill">
+            <mat-label>Typ</mat-label>
+            <mat-select [(value)]="positionForm.value.positionType" name="c">
+              <mat-option *ngFor="let type of positionTypes" [value]="type.value">
+                {{type.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="positionForm.value" cdkFocusInitial>Ok</button>
+</div>

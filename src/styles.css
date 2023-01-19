@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #B0B0FF; }
+table {
+    width: 100%;
+}
+
+.return-button{
+    width: 20%;
+    background-color: #1050F0;
+    color: white;
+    padding: 1em 1em;
+    border: 1px solid black;
+    border-radius: 1em;
+    cursor: pointer;
+    margin: 1em 1em;
+    font-size: large;
+}
+
+.return-button:hover {
+    background-color: #10A0F0;
+}
+
+.mat-table {
+    background-color: #EFEFFF;
+}
+
+.mat-icon:hover {
+    background-color: grey;
+    border-radius: 0.3em;
+}
+
+.mat-header-row {
+    background-color: #CFCFFF;
+} 
